@@ -1,0 +1,68 @@
+.button {
+  width: 158px;
+  --btn-bg: #2F5BCF;
+  --btn-bg-hover: #193494;
+  --btn-bg-active: #142a78;
+  --btn-text: #FFFFFF;
+  --btn-disabled: #C0C8D1;
+  --btn-ring: rgba(47, 91, 207, 0.35);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  font-family: 'SF Pro Display', -apple-system, sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+
+  border: none;
+  cursor: pointer;
+  background: var(--btn-bg);
+  color: var(--btn-text);
+
+  transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.lg {
+  height: 64px;
+  /* padding: 16px; */
+  border-radius: 12px;
+  font-size: 20px;
+  line-height: 32px;
+}
+
+.md {
+  height: 56px;
+  /* padding: 16px; */
+  border-radius: 8px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.sm {
+  height: 40px;
+  /* padding: 12px; */
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.button:hover:not(:disabled) {
+  background: var(--btn-bg-hover);
+}
+
+.button:active:not(:disabled) {
+  background: var(--btn-bg-active);
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--btn-ring);
+}
+
+.button:disabled {
+  background: var(--btn-disabled);
+  color: var(--btn-text);
+  cursor: not-allowed;
+}
