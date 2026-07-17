@@ -9,7 +9,7 @@ export default function Button({
   onClick,
   type = 'button',
 }: ButtonProps) {
-  const className = `${styles.button} ${styles[size]}`
+  const className = `${styles.button} ${styles[size]} ${styles[variant]}`
 
   return (
     <button type={type} className={className} disabled={disabled} onClick={onClick}>

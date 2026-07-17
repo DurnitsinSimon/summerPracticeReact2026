@@ -1,0 +1,78 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-white);
+  transition: background-color 0.15s ease;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.label {
+  white-space: nowrap;
+}
+
+.remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  font-size: 15px;
+  line-height: 1;
+  color: inherit;
+  opacity: 0.75;
+  cursor: pointer;
+}
+
+.remove:hover:not(:disabled) {
+  opacity: 1;
+}
+
+.neutral {
+  background: var(--color-neutral-900);
+}
+
+.neutral:hover {
+  background: var(--color-neutral-900-hover);
+}
+
+.negative {
+  background: var(--color-negative);
+}
+
+.negative:hover {
+  background: var(--color-negative-hover);
+}
+
+.positive {
+  background: var(--color-positive);
+}
+
+.positive:hover {
+  background: var(--color-positive-hover);
+}
+
+.disabled,
+.disabled:hover {
+  background: var(--color-neutral-200);
+  color: var(--color-neutral-500);
+  cursor: not-allowed;
+}
+
+.disabled .remove {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

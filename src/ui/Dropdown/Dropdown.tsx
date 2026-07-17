@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
 import type { DropdownProps } from './Dropdown.types'
+import styles from './Dropdown.module.css'
 
 export default function Dropdown({
   options,
@@ -29,22 +30,35 @@ export default function Dropdown({
   }
 
   return (
-    <div ref={rootRef}>
+    <div ref={rootRef} className={styles.wrapper}>
       <button
         type="button"
         disabled={disabled}
         onClick={() => setIsOpen((prev) => !prev)}
+        className={`${styles.trigger} ${isOpen ? styles.triggerOpen : ''}`}
       >
-        {selectedOption ? selectedOption.label : placeholder}
+        <span className={selectedOption ? styles.value : styles.placeholder}>
+          {selectedOption ? selectedOption.label : placeholder}
+        </span>
+        <svg
+          className={`${styles.chevron} ${isOpen ? styles.chevronOpen : ''}`}
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+        >
+          <path d="m4 6 4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       </button>
       {isOpen && (
-        <ul role="listbox">
+        <ul role="listbox" className={styles.panel}>
           {options.map((option) => (
             <li
               key={option.value}
               role="option"
               aria-selected={option.value === value}
               onClick={() => handleSelect(option.value)}
+              className={`${styles.option} ${option.value === value ? styles.optionSelected : ''}`}
             >
               {option.label}
             </li>

@@ -1,0 +1,92 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  font-family: var(--font-ui);
+  text-align: left;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-neutral-900);
+}
+
+.optional {
+  font-weight: 400;
+  color: var(--color-neutral-500);
+}
+
+.field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.field:hover:not(.disabledField) {
+  border-color: var(--color-neutral-500);
+}
+
+.field:focus-within {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 var(--focus-ring-width) var(--color-primary-ring);
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: var(--color-neutral-500);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  font: inherit;
+  font-size: 14px;
+  color: var(--color-neutral-900);
+}
+
+.input::placeholder {
+  color: var(--color-neutral-500);
+}
+
+.errorField {
+  border-color: var(--color-negative);
+}
+
+.errorField:focus-within {
+  border-color: var(--color-negative);
+  box-shadow: 0 0 0 var(--focus-ring-width) rgba(225, 59, 59, 0.2);
+}
+
+.disabledField {
+  background: var(--color-neutral-100);
+  border-color: var(--color-neutral-200);
+  cursor: not-allowed;
+}
+
+.disabledField .input {
+  color: var(--color-neutral-500);
+  cursor: not-allowed;
+}
+
+.caption {
+  font-size: 12px;
+  color: var(--color-neutral-500);
+}
+
+.errorCaption {
+  color: var(--color-negative);
+}

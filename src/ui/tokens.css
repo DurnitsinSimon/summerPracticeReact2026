@@ -1,0 +1,39 @@
+:root {
+  --font-ui: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --color-primary: #2F5BCF;
+  --color-primary-hover: #193494;
+  --color-primary-active: #142a78;
+  --color-primary-bg: #EAF0FD;
+  --color-primary-ring: rgba(47, 91, 207, 0.35);
+
+  --color-neutral-900: #1F2430;
+  --color-neutral-900-hover: #11151d;
+  --color-neutral-700: #4B5565;
+  --color-neutral-500: #8A94A6;
+  --color-neutral-300: #C0C8D1;
+  --color-neutral-200: #E1E5EA;
+  --color-neutral-100: #F2F4F7;
+  --color-white: #FFFFFF;
+
+  --color-positive: #2F9E4F;
+  --color-positive-hover: #1F7A3B;
+  --color-positive-bg: #E9F8ED;
+
+  --color-negative: #E13B3B;
+  --color-negative-hover: #B62E2E;
+  --color-negative-bg: #FDEAEA;
+
+  --color-warning: #C97A1B;
+  --color-warning-hover: #A3620F;
+  --color-warning-bg: #FDF3E6;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  --shadow-panel: 0 8px 24px rgba(31, 36, 48, 0.12);
+
+  --focus-ring-width: 3px;
+}
