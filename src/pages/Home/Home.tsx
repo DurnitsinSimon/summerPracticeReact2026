@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import styles from './App.module.css'
-import { Alert, Badge, Button, Dropdown, Input, Toggle } from './ui'
+import styles from './Home.module.css'
+import { Alert, Badge, Button, Dropdown, Input, Toggle } from '../../ui'
 
 const sortOptions = [
   { value: 'popular', label: 'По популярности' },
@@ -8,7 +8,7 @@ const sortOptions = [
   { value: 'price-desc', label: 'Сначала дороже' },
 ]
 
-function App() {
+function Home() {
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState('popular')
   const [inStock, setInStock] = useState(true)
@@ -114,4 +114,4 @@ function App() {
   )
 }
 
-export default App
+export default Home

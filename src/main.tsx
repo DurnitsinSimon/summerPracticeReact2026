@@ -1,12 +1,21 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import { RouterProvider } from 'react-router-dom'
 import './styles/reset.css'
 import './ui/tokens.css'
 import './index.css'
-import App from './App.tsx'
+import { router } from './app/providers/router'
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+async function enableMocking() {
+  if (!import.meta.env.DEV) return
+  const { worker } = await import('./mocks/browser')
+  return worker.start({ onUnhandledRequest: 'bypass' })
+}
+
+enableMocking().then(() => {
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <RouterProvider router={router} />
+    </StrictMode>,
+  )
+})

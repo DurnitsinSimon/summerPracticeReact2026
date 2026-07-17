@@ -1,0 +1,42 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 32px;
+  border-bottom: 1px solid var(--color-neutral-200);
+  background: var(--color-white);
+  font-family: var(--font-ui);
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-neutral-900);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.link {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+.link:hover {
+  color: var(--color-primary-hover);
+}
+
+.profileLink {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-neutral-900);
+}
+
+.profileLink:hover {
+  color: var(--color-primary);
+}
