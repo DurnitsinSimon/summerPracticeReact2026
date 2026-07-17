@@ -5,5 +5,9 @@ export type InputProps = {
   type?: 'text' | 'password' | 'email' | 'number'
   disabled?: boolean
   error?: string
+  caption?: string
   label?: string
+  required?: boolean
+  leadingIcon?: React.ReactNode
+  trailingIcon?: React.ReactNode
 }

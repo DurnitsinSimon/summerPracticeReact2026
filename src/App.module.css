@@ -1,8 +1,9 @@
 .page {
-  max-width: 800px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 48px 24px;
-  font-family: 'SF Pro Display', -apple-system, sans-serif;
+  font-family: var(--font-ui);
+  text-align: left;
 }
 
 .heading {
@@ -24,9 +25,19 @@
 
 .row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 16px;
   flex-wrap: wrap;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.field {
+  width: 280px;
 }
 
 .hint {
