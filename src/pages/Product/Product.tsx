@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { getProduct } from '../../api/products'
 import type { Product as ProductType } from '../../mocks/db'
-import { Alert, Badge } from '../../ui'
+import { useCartStore } from '../../store/cart'
+import { useSessionStore } from '../../store/session'
+import { Alert, Badge, Button } from '../../ui'
 import styles from './Product.module.css'
 
 const priceFormatter = new Intl.NumberFormat('ru-RU', {
@@ -15,6 +17,8 @@ function Product() {
   const { id } = useParams<{ id: string }>()
   const [product, setProduct] = useState<ProductType | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const user = useSessionStore((state) => state.user)
+  const addItem = useCartStore((state) => state.addItem)
 
   useEffect(() => {
     if (!id) return
@@ -77,6 +81,14 @@ function Product() {
           {product.badge && <Badge label={product.badge.label} variant={product.badge.variant} icon={null} />}
           <span className={styles.price}>{priceFormatter.format(product.price)}</span>
           <p className={styles.description}>{product.description}</p>
+
+          {user ? (
+            <Button onClick={() => addItem(product)}>Добавить в корзину</Button>
+          ) : (
+            <p className={styles.loginPrompt}>
+              Чтобы добавить товар в корзину, <Link to="/login">войдите</Link>
+            </p>
+          )}
         </div>
       </div>
     </div>

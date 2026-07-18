@@ -1,0 +1,157 @@
+.page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+  font-family: var(--font-ui);
+  text-align: left;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 400px;
+  margin: 64px auto 0;
+  padding: 32px;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-neutral-900);
+  margin: 0 0 24px;
+}
+
+.text {
+  font-size: 14px;
+  color: var(--color-neutral-700);
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.back {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+.back:hover {
+  color: var(--color-primary-hover);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-md);
+  background: var(--color-white);
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.category {
+  font-size: 12px;
+  color: var(--color-neutral-500);
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-neutral-900);
+}
+
+.unitPrice {
+  font-size: 13px;
+  color: var(--color-neutral-500);
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stepButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--color-neutral-300);
+  border-radius: var(--radius-sm);
+  background: var(--color-white);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.stepButton:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.quantityValue {
+  min-width: 20px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.lineTotal {
+  min-width: 100px;
+  text-align: right;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-neutral-900);
+}
+
+.remove {
+  font-size: 18px;
+  line-height: 1;
+  color: var(--color-neutral-500);
+  cursor: pointer;
+}
+
+.remove:hover {
+  color: var(--color-negative);
+}
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--color-neutral-200);
+  font-size: 16px;
+  color: var(--color-neutral-900);
+}
+
+.total {
+  font-size: 20px;
+  font-weight: 600;
+}

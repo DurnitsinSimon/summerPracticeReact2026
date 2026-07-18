@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import * as authApi from '../api/auth'
 import type { PublicUser, Role } from '../mocks/db'
+import { useCartStore } from './cart'
 
 type SessionState = {
   token: string | null
@@ -30,6 +31,7 @@ export const useSessionStore = create<SessionState>()(
 
       logout() {
         set({ token: null, user: null })
+        useCartStore.getState().clear()
       },
 
       async restore() {

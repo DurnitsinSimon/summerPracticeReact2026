@@ -70,6 +70,20 @@
   color: var(--color-neutral-700);
 }
 
+.loginPrompt {
+  font-size: 14px;
+  color: var(--color-neutral-700);
+}
+
+.loginPrompt a {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.loginPrompt a:hover {
+  color: var(--color-primary-hover);
+}
+
 @media (max-width: 640px) {
   .layout {
     grid-template-columns: 1fr;
