@@ -17,6 +17,7 @@ export type Product = {
   title: string
   price: number
   category: string
+  description: string
   badge?: { label: string; variant: ProductBadgeVariant }
 }
 
@@ -98,6 +99,8 @@ const products: Product[] = [
     title: 'Беспроводные наушники Aria',
     price: 6990,
     category: 'Электроника',
+    description:
+      'Накладные наушники с активным шумоподавлением и до 30 часов работы без подзарядки. В комплекте чехол и кабель USB-C.',
     badge: { label: 'Хит продаж', variant: 'positive' },
   },
   {
@@ -105,6 +108,8 @@ const products: Product[] = [
     title: 'Умные часы Pulse',
     price: 12490,
     category: 'Электроника',
+    description:
+      'Отслеживают пульс, сон и тренировки, показывают уведомления со смартфона. Влагозащита и автономность до 7 дней.',
     badge: { label: 'Новинка', variant: 'neutral' },
   },
   {
@@ -112,12 +117,14 @@ const products: Product[] = [
     title: 'Портативная колонка Wave',
     price: 4290,
     category: 'Электроника',
+    description: 'Компактная Bluetooth-колонка с защитой от брызг и объёмным звуком для дома и улицы.',
   },
   {
     id: 'product-4',
     title: 'Куртка утеплённая Nord',
     price: 8990,
     category: 'Одежда',
+    description: 'Тёплая куртка на синтепоне для холодной погоды, водоотталкивающая ткань, капюшон отстёгивается.',
     badge: { label: '-15%', variant: 'negative' },
   },
   {
@@ -125,12 +132,14 @@ const products: Product[] = [
     title: 'Кроссовки Runner Pro',
     price: 5490,
     category: 'Одежда',
+    description: 'Лёгкие беговые кроссовки с амортизирующей подошвой, подойдут как для тренировок, так и на каждый день.',
   },
   {
     id: 'product-6',
     title: 'Кофемашина Aroma',
     price: 15990,
     category: 'Дом',
+    description: 'Автоматическая кофемашина с капучинатором, готовит эспрессо и кофе на молоке одним нажатием.',
     badge: { label: 'Новинка', variant: 'neutral' },
   },
   {
@@ -138,16 +147,22 @@ const products: Product[] = [
     title: 'Набор ножей Chef',
     price: 3490,
     category: 'Дом',
+    description: 'Набор из 5 кухонных ножей из нержавеющей стали с подставкой, для любых видов нарезки.',
   },
   {
     id: 'product-8',
     title: 'Коврик для йоги Flex',
     price: 1990,
     category: 'Спорт',
+    description: 'Нескользящий коврик толщиной 6 мм для йоги и растяжки, в комплекте чехол для переноски.',
     badge: { label: '-15%', variant: 'negative' },
   },
 ]
 
 export function getProducts(): Product[] {
   return products
+}
+
+export function getProduct(id: string): Product | undefined {
+  return products.find((product) => product.id === id)
 }

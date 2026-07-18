@@ -3,6 +3,7 @@ import {
   createUser,
   findUserByCredentials,
   findUserByEmail,
+  getProduct,
   getProducts,
   getUserByToken,
   issueToken,
@@ -53,5 +54,15 @@ export const handlers = [
 
   http.get('/api/products', () => {
     return HttpResponse.json({ products: getProducts() })
+  }),
+
+  http.get('/api/products/:id', ({ params }) => {
+    const product = getProduct(params.id as string)
+
+    if (!product) {
+      return HttpResponse.json({ message: 'Товар не найден' }, { status: 404 })
+    }
+
+    return HttpResponse.json({ product })
   }),
 ]
