@@ -9,6 +9,28 @@
   font-family: var(--font-ui);
 }
 
+.leftGroup {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.navButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  color: var(--color-neutral-700);
+  cursor: pointer;
+}
+
+.navButton:hover {
+  background: var(--color-neutral-100);
+  color: var(--color-primary);
+}
+
 .logo {
   font-size: 20px;
   font-weight: 600;
@@ -39,4 +61,34 @@
 
 .profileLink:hover {
   color: var(--color-primary);
+}
+
+.cartLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-neutral-700);
+}
+
+.cartLink:hover {
+  color: var(--color-primary);
+}
+
+.cartCount {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: var(--radius-pill);
+  background: var(--color-primary);
+  color: var(--color-white);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1;
 }
