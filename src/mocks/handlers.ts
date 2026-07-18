@@ -3,6 +3,7 @@ import {
   createUser,
   findUserByCredentials,
   findUserByEmail,
+  getProducts,
   getUserByToken,
   issueToken,
   toPublicUser,
@@ -48,5 +49,9 @@ export const handlers = [
     }
 
     return HttpResponse.json({ user: toPublicUser(user) })
+  }),
+
+  http.get('/api/products', () => {
+    return HttpResponse.json({ products: getProducts() })
   }),
 ]

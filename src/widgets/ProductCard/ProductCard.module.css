@@ -1,0 +1,48 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px;
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-lg);
+  background: var(--color-white);
+  font-family: var(--font-ui);
+  text-align: left;
+}
+
+.thumbnail {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 140px;
+  margin-bottom: 12px;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-bg);
+  color: var(--color-primary);
+}
+
+.badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+
+.category {
+  font-size: 12px;
+  color: var(--color-neutral-500);
+}
+
+.title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-neutral-900);
+  margin: 0;
+}
+
+.price {
+  margin-top: 4px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-neutral-900);
+}
