@@ -1,16 +1,9 @@
 import type { PublicUser } from '../mocks/db'
+import { parseResponse } from './http'
 
 export type AuthResponse = {
   token: string
   user: PublicUser
-}
-
-async function parseResponse<T>(response: Response): Promise<T> {
-  const data = await response.json()
-  if (!response.ok) {
-    throw new Error(data.message ?? 'Что-то пошло не так')
-  }
-  return data as T
 }
 
 export async function login(email: string, password: string): Promise<AuthResponse> {
