@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom'
 import App from '../App'
+import RequireAuth from './RequireAuth'
 import Home from '../../pages/Home'
 import Login from '../../pages/Login'
 import Register from '../../pages/Register'
@@ -15,9 +16,14 @@ export const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: 'login', element: <Login /> },
       { path: 'register', element: <Register /> },
-      { path: 'profile', element: <Profile /> },
       { path: 'product/:id', element: <Product /> },
-      { path: 'cart', element: <Cart /> },
+      {
+        element: <RequireAuth />,
+        children: [
+          { path: 'profile', element: <Profile /> },
+          { path: 'cart', element: <Cart /> },
+        ],
+      },
     ],
   },
 ])

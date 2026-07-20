@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { useCartStore } from '../../store/cart'
 import { useSessionStore } from '../../store/session'
-import { Alert, Button } from '../../ui'
+import { Alert } from '../../ui'
 import styles from './Cart.module.css'
 
 const priceFormatter = new Intl.NumberFormat('ru-RU', {
@@ -16,24 +16,8 @@ function Cart() {
   const setQuantity = useCartStore((state) => state.setQuantity)
   const removeItem = useCartStore((state) => state.removeItem)
 
-  if (!user) {
-    return (
-      <div className={styles.page}>
-        <div className={styles.card}>
-          <h1 className={styles.heading}>Корзина доступна только авторизованным пользователям</h1>
-          <p className={styles.text}>Войдите или зарегистрируйтесь, чтобы добавлять товары в корзину.</p>
-          <div className={styles.actions}>
-            <Link to="/login">
-              <Button>Войти</Button>
-            </Link>
-            <Link to="/register">
-              <Button variant="secondary">Регистрация</Button>
-            </Link>
-          </div>
-        </div>
-      </div>
-    )
-  }
+  // // RequireAuth guarantees a user reaches this page; this only narrows the type.
+  if (!user) return null
 
   if (items.length === 0) {
     return (
