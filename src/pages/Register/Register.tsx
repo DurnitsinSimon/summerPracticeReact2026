@@ -1,8 +1,9 @@
 import { useState, type FormEvent } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Alert, Button, Input } from '../../ui'
 import { useSessionStore } from '../../store/session'
 import { isEmail, isRequired, minLength } from '../../shared/validation'
+import type { RequireAuthState } from '../../app/providers/RequireAuth'
 import styles from './Register.module.css'
 
 type Errors = Partial<{ name: string; email: string; password: string; confirmPassword: string }>
@@ -10,6 +11,8 @@ type Errors = Partial<{ name: string; email: string; password: string; confirmPa
 function Register() {
   const register = useSessionStore((state) => state.register)
   const navigate = useNavigate()
+  const location = useLocation()
+  const from = (location.state as RequireAuthState | null)?.from?.pathname ?? '/'
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -41,7 +44,7 @@ function Register() {
     setIsSubmitting(true)
     try {
       await register(name, email, password)
-      navigate('/')
+      navigate(from, { replace: true })
     } catch (error) {
       setServerError(error instanceof Error ? error.message : 'Не удалось зарегистрироваться')
     } finally {
@@ -53,6 +56,8 @@ function Register() {
     <div className={styles.page}>
       <form className={styles.form} onSubmit={handleSubmit} noValidate>
         <h1 className={styles.heading}>Регистрация</h1>
+
+        {from !== '/' && <p className={styles.hint}>Войдите, чтобы продолжить</p>}
 
         {serverError && <Alert variant="error">{serverError}</Alert>}
 

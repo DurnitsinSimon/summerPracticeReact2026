@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { Badge, Button } from '../../ui'
 import { useSessionStore } from '../../store/session'
 import styles from './Profile.module.css'
@@ -12,24 +11,8 @@ function Profile() {
   const user = useSessionStore((state) => state.user)
   const logout = useSessionStore((state) => state.logout)
 
-  if (!user) {
-    return (
-      <div className={styles.page}>
-        <div className={styles.card}>
-          <h1 className={styles.heading}>Вы не авторизованы</h1>
-          <p className={styles.text}>Войдите или зарегистрируйтесь, чтобы увидеть профиль.</p>
-          <div className={styles.actions}>
-            <Link to="/login">
-              <Button>Войти</Button>
-            </Link>
-            <Link to="/register">
-              <Button variant="secondary">Регистрация</Button>
-            </Link>
-          </div>
-        </div>
-      </div>
-    )
-  }
+  // RequireAuth guarantees a user reaches this page; this only narrows the type.
+  if (!user) return null
 
   return (
     <div className={styles.page}>

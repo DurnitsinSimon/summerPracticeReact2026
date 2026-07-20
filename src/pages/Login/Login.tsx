@@ -1,8 +1,9 @@
 import { useState, type FormEvent } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Alert, Button, Input } from '../../ui'
 import { useSessionStore } from '../../store/session'
 import { isEmail, isRequired } from '../../shared/validation'
+import type { RequireAuthState } from '../../app/providers/RequireAuth'
 import styles from './Login.module.css'
 
 type Errors = Partial<{ email: string; password: string }>
@@ -10,6 +11,8 @@ type Errors = Partial<{ email: string; password: string }>
 function Login() {
   const login = useSessionStore((state) => state.login)
   const navigate = useNavigate()
+  const location = useLocation()
+  const from = (location.state as RequireAuthState | null)?.from?.pathname ?? '/'
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -36,7 +39,7 @@ function Login() {
     setIsSubmitting(true)
     try {
       await login(email, password)
-      navigate('/')
+      navigate(from, { replace: true })
     } catch (error) {
       setServerError(error instanceof Error ? error.message : 'Не удалось войти')
     } finally {
@@ -48,6 +51,8 @@ function Login() {
     <div className={styles.page}>
       <form className={styles.form} onSubmit={handleSubmit} noValidate>
         <h1 className={styles.heading}>Вход</h1>
+
+        {from !== '/' && <p className={styles.hint}>Войдите, чтобы продолжить</p>}
 
         {serverError && <Alert variant="error">{serverError}</Alert>}
 
