@@ -11,3 +11,8 @@ export function isEmail(value: string): boolean {
 export function minLength(value: string, length: number): boolean {
   return value.trim().length >= length
 }
+
+export function isPositiveNumber(value: string): boolean {
+  const parsed = Number(value)
+  return value.trim().length > 0 && Number.isFinite(parsed) && parsed > 0
+}

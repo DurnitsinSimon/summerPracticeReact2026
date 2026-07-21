@@ -25,6 +25,7 @@ type StoredState = {
   users: User[]
   tokens: Record<string, string>
   nextUserId: number
+  products: Product[]
 }
 
 const STORAGE_KEY = 'mock-db'
@@ -37,63 +38,7 @@ const seedAdmin: User = {
   role: 'admin',
 }
 
-function loadState(): StoredState {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY)
-    if (raw) return JSON.parse(raw) as StoredState
-  } catch {
-    // corrupted storage, fall back to a fresh seed below
-  }
-  return { users: [seedAdmin], tokens: {}, nextUserId: 1 }
-}
-
-// MSW handlers run inside the page's own module scope, not a real server process,
-// so state must be persisted to localStorage to survive a page reload.
-const state = loadState()
-
-function persist() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
-}
-
-export function toPublicUser(user: User): PublicUser {
-  return { id: user.id, name: user.name, email: user.email, role: user.role }
-}
-
-export function findUserByEmail(email: string): User | undefined {
-  return state.users.find((user) => user.email.toLowerCase() === email.toLowerCase())
-}
-
-export function findUserByCredentials(email: string, password: string): User | undefined {
-  const user = findUserByEmail(email)
-  return user && user.password === password ? user : undefined
-}
-
-export function createUser(input: { name: string; email: string; password: string }): User {
-  const user: User = {
-    id: `user-${state.nextUserId++}`,
-    name: input.name,
-    email: input.email,
-    password: input.password,
-    role: 'user',
-  }
-  state.users.push(user)
-  persist()
-  return user
-}
-
-export function issueToken(userId: string): string {
-  const token = crypto.randomUUID()
-  state.tokens[token] = userId
-  persist()
-  return token
-}
-
-export function getUserByToken(token: string): User | undefined {
-  const userId = state.tokens[token]
-  return userId ? state.users.find((user) => user.id === userId) : undefined
-}
-
-const products: Product[] = [
+const seedProducts: Product[] = [
   {
     id: 'product-1',
     title: 'Беспроводные наушники Aria',
@@ -159,10 +104,102 @@ const products: Product[] = [
   },
 ]
 
+function loadState(): StoredState {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (raw) {
+      const parsed = JSON.parse(raw) as Partial<StoredState>
+      // Defend against localStorage saved by an older version of the app that
+      // predates one of these fields (e.g. `products` was added after `users`/`tokens`).
+      return {
+        users: parsed.users ?? [seedAdmin],
+        tokens: parsed.tokens ?? {},
+        nextUserId: parsed.nextUserId ?? 1,
+        products: parsed.products ?? seedProducts,
+      }
+    }
+  } catch {
+    // corrupted storage, fall back to a fresh seed below
+  }
+  return { users: [seedAdmin], tokens: {}, nextUserId: 1, products: seedProducts }
+}
+
+// MSW handlers run inside the page's own module scope, not a real server process,
+// so state must be persisted to localStorage to survive a page reload.
+const state = loadState()
+
+function persist() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state))
+}
+
+export function toPublicUser(user: User): PublicUser {
+  return { id: user.id, name: user.name, email: user.email, role: user.role }
+}
+
+export function findUserByEmail(email: string): User | undefined {
+  return state.users.find((user) => user.email.toLowerCase() === email.toLowerCase())
+}
+
+export function findUserByCredentials(email: string, password: string): User | undefined {
+  const user = findUserByEmail(email)
+  return user && user.password === password ? user : undefined
+}
+
+export function createUser(input: { name: string; email: string; password: string }): User {
+  const user: User = {
+    id: `user-${state.nextUserId++}`,
+    name: input.name,
+    email: input.email,
+    password: input.password,
+    role: 'user',
+  }
+  state.users.push(user)
+  persist()
+  return user
+}
+
+export function issueToken(userId: string): string {
+  const token = crypto.randomUUID()
+  state.tokens[token] = userId
+  persist()
+  return token
+}
+
+export function getUserByToken(token: string): User | undefined {
+  const userId = state.tokens[token]
+  return userId ? state.users.find((user) => user.id === userId) : undefined
+}
+
 export function getProducts(): Product[] {
-  return products
+  return state.products
 }
 
 export function getProduct(id: string): Product | undefined {
-  return products.find((product) => product.id === id)
+  return state.products.find((product) => product.id === id)
+}
+
+export function createProduct(input: {
+  title: string
+  price: number
+  category: string
+  description: string
+}): Product {
+  const product: Product = {
+    id: crypto.randomUUID(),
+    title: input.title,
+    price: input.price,
+    category: input.category,
+    description: input.description,
+  }
+  state.products.push(product)
+  persist()
+  return product
+}
+
+export function deleteProduct(id: string): boolean {
+  const index = state.products.findIndex((product) => product.id === id)
+  if (index === -1) return false
+  state.products.splice(index, 1)
+  persist()
+  return true
 }
