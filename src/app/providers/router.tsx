@@ -7,6 +7,7 @@ import Register from '../../pages/Register'
 import Profile from '../../pages/Profile'
 import Product from '../../pages/Product'
 import Cart from '../../pages/Cart'
+import Admin from '../../pages/Admin'
 
 export const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ export const router = createBrowserRouter([
           { path: 'profile', element: <Profile /> },
           { path: 'cart', element: <Cart /> },
         ],
+      },
+      {
+        element: <RequireAuth role="admin" />,
+        children: [{ path: 'admin', element: <Admin /> }],
       },
     ],
   },

@@ -12,3 +12,28 @@ export async function getProduct(id: string): Promise<Product> {
   const data = await parseResponse<{ product: Product }>(response)
   return data.product
 }
+
+export type CreateProductInput = {
+  title: string
+  price: number
+  category: string
+  description: string
+}
+
+export async function createProduct(token: string, input: CreateProductInput): Promise<Product> {
+  const response = await fetch('/api/products', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+    body: JSON.stringify(input),
+  })
+  const data = await parseResponse<{ product: Product }>(response)
+  return data.product
+}
+
+export async function deleteProduct(token: string, id: string): Promise<void> {
+  const response = await fetch(`/api/products/${id}`, {
+    method: 'DELETE',
+    headers: { Authorization: `Bearer ${token}` },
+  })
+  await parseResponse<{ ok: true }>(response)
+}

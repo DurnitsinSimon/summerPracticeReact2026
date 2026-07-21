@@ -39,7 +39,7 @@ function Header() {
           </svg>
         </button>
         <Link to="/" className={styles.logo}>
-          Shop
+          Summer Practice Shop
         </Link>
       </div>
 
@@ -64,6 +64,11 @@ function Header() {
               {user.name}
             </Link>
             <Badge label={roleLabel[user.role]} variant={user.role === 'admin' ? 'positive' : 'neutral'} />
+            {user.role === 'admin' && (
+              <Link to="/admin" className={styles.link}>
+                Admin
+              </Link>
+            )}
             <Button variant="ghost" size="sm" onClick={logout}>
               Выйти
             </Button>
